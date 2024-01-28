@@ -6,40 +6,31 @@ import java.util.Scanner;
 
 public class BrowserHistoryUpgrade {
     public static void main(String[] args) {
-
-        Scanner scan = new Scanner(System.in);
-
-        String input = scan.nextLine();
-
-        Deque<String> stack = new ArrayDeque<>();
-        Deque<String> forwardStack = new ArrayDeque<>();
-
-        while (!"Home".equals(input)) {
-
-            if ("forward".equals(input)) {
-
-                if (forwardStack.isEmpty()) {
-                    System.out.println("no next URLs");
+        Scanner scanner = new Scanner(System.in);
+        ArrayDeque<String> browserHistory = new ArrayDeque<>();
+        ArrayDeque<String> browserHistoryNew = new ArrayDeque<>();
+        String input = scanner.nextLine();
+        while (!input.equals("Home")) {
+            if (input.equals("back")) {
+                if (browserHistory.size() > 1) {
+                    browserHistoryNew.addFirst(browserHistory.pop());
+                    System.out.printf("%s%n", browserHistory.peek());
                 } else {
-                    stack.push(forwardStack.peek());
-                    forwardStack.pop();
-                    System.out.println(stack.peek());
+                    System.out.printf("no previous URLs%n");
                 }
-            } else if (!"back".equals(input)) {
-                stack.push(input);
-                System.out.println(input);
-            } else if (stack.size() <= 1) {
-                System.out.println("no previous URLs");
+            } else if (input.equals("forward")) {
+                if (!browserHistoryNew.isEmpty()) {
+                    browserHistory.push(browserHistoryNew.pop());
+                    System.out.printf("%s%n",browserHistory.peek());
+                } else {
+                    System.out.printf("no next URLs%n");
+                }
             } else {
-                forwardStack.push(stack.peek());
-                stack.pop();
-                System.out.println(stack.peek());
+                browserHistory.push(input);
+                browserHistoryNew.clear();
+                System.out.printf("%s%n", browserHistory.peek());
             }
-
-
-            input = scan.nextLine();
+            input = scanner.nextLine();
         }
-
-
     }
 }
