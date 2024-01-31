@@ -1,4 +1,4 @@
-package ExamsPractice;
+package ExamsPracticeP1;
 
 import java.util.*;
 
@@ -60,25 +60,25 @@ public class WormsHoles {
             System.out.println("There are no matches.");
         }
 
-        if (wormsStack.isEmpty() && holesQueue.isEmpty()) {
-            System.out.println("Every worm found a suitable hole!");
-        } else if (countWorms == 0) {
-            System.out.println("Worms left: none");
+        if (wormsStack.isEmpty()) {
+            if (matchesCount == wormsInput.length) {
+                System.out.println("Every worm found a suitable hole!");
+            } else {
+                System.out.println("Worms left: none");
+            }
         } else if (countWorms > 0) {
-            System.out.print("Worms left: ");
 
             //Convert stack into List to reverse it
             List<Integer> wormsList = new ArrayList<>(wormsStack);
             Collections.reverse(wormsList);
 
-            System.out.println(String.join(", ", wormsList.toString().replaceAll("[\\[\\]]", "")));
+            System.out.println("Worms left: " + String.join(", ", wormsList.toString().replaceAll("[\\[\\]]", "")));
         }
 
-        if (holesQueue.size() < 1) {
+        if (holesQueue.isEmpty()) {
             System.out.println("Holes left: none");
         } else {
-            System.out.println("Holes left: ");
-            System.out.println(String.join(", ", holesQueue.toString().replaceAll("[\\[\\]]", "")));
+            System.out.println("Holes left: " + String.join(", ", holesQueue.toString().replaceAll("[\\[\\]]", "")));
         }
     }
 }

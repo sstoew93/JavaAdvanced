@@ -1,4 +1,4 @@
-package ExamsPractice;
+package ExamsPracticeP1;
 
 import java.util.*;
 
